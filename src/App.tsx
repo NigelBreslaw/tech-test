@@ -57,9 +57,9 @@ function App() {
         </div>
       </div>
 
-      <img 
-        src={ipadFrame} 
-        alt="iPad Frame" 
+      <img
+        src={ipadFrame}
+        alt="iPad Frame"
         className="ipad-frame"
       />
     </div>
