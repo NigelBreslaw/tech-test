@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import greenCrystalsVideo from './assets/green-crystals.mp4'
 import blueCrystalsVideo from './assets/blue-crystals.mp4'
 import slintTextImage from './assets/slint-text.png'
@@ -6,10 +6,25 @@ import './App.css'
 
 function App() {
   const [videoPlaying, setVideoPlaying] = useState(true)
+  const backgroundVideoRef = useRef<HTMLVideoElement>(null)
+  const maskedVideoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    if (backgroundVideoRef.current && maskedVideoRef.current) {
+      if (videoPlaying) {
+        backgroundVideoRef.current.play()
+        maskedVideoRef.current.play()
+      } else {
+        backgroundVideoRef.current.pause()
+        maskedVideoRef.current.pause()
+      }
+    }
+  }, [videoPlaying])
 
   return (
     <>
       <video
+        ref={backgroundVideoRef}
         className="background-video"
         autoPlay
         loop
@@ -28,6 +43,7 @@ function App() {
           }}
         >
           <video
+            ref={maskedVideoRef}
             className="masked-video"
             autoPlay
             loop
@@ -42,13 +58,7 @@ function App() {
         <button onClick={() => setVideoPlaying(!videoPlaying)}>
           Play / Stop
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
