@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import greenCrystalsVideo from './assets/green-crystals.mp4'
 import slintTextImage from './assets/slint-text.png'
+import ipadFrame from './assets/ipad-m4-landscape.png'
 import Webcam from 'react-webcam'
 import './App.css'
 
@@ -19,7 +20,7 @@ function App() {
   }, [videoPlaying])
 
   return (
-    <>
+    <div className="app-container">
       <video
         ref={backgroundVideoRef}
         className="background-video"
@@ -31,29 +32,37 @@ function App() {
         <source src={greenCrystalsVideo} type="video/mp4" />
       </video>
 
-      <div className="video-text-container">
-        <div
-          className="video-mask"
-          style={{
-            maskImage: `url(${slintTextImage})`,
-            WebkitMaskImage: `url(${slintTextImage})`
-          }}
-        >
-          {videoPlaying && (
-            <Webcam
-              className="masked-video"
-              audio={false}
-              mirrored={false}
-            />
-          )}
+      <div className="ipad-content">
+        <div className="video-text-container">
+          <div
+            className="video-mask"
+            style={{
+              maskImage: `url(${slintTextImage})`,
+              WebkitMaskImage: `url(${slintTextImage})`
+            }}
+          >
+            {videoPlaying && (
+              <Webcam
+                className="masked-video"
+                audio={false}
+                mirrored={false}
+              />
+            )}
+          </div>
+        </div>
+        <div className="card">
+          <button onClick={() => setVideoPlaying(!videoPlaying)}>
+            {videoPlaying ? 'Stop Webcam' : 'Start Webcam'}
+          </button>
         </div>
       </div>
-      <div className="card">
-        <button onClick={() => setVideoPlaying(!videoPlaying)}>
-          {videoPlaying ? 'Stop Webcam' : 'Start Webcam'}
-        </button>
-      </div>
-    </>
+
+      <img 
+        src={ipadFrame} 
+        alt="iPad Frame" 
+        className="ipad-frame"
+      />
+    </div>
   )
 }
 
