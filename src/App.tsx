@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import greenCrystalsVideo from './assets/green-crystals.mp4'
+import blueCrystalsVideo from './assets/blue-crystals.mp4'
+import slintTextImage from './assets/slint-text.png'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [videoPlaying, setVideoPlaying] = useState(true)
 
   return (
     <>
@@ -18,18 +18,29 @@ function App() {
       >
         <source src={greenCrystalsVideo} type="video/mp4" />
       </video>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+
+      <div className="video-text-container">
+        <div 
+          className="video-mask"
+          style={{ 
+            maskImage: `url(${slintTextImage})`, 
+            WebkitMaskImage: `url(${slintTextImage})` 
+          }}
+        >
+          <video
+            className="masked-video"
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
+            <source src={blueCrystalsVideo} type="video/mp4" />
+          </video>
+        </div>
       </div>
-      <h1 style={{ fontSize: '6em', color: 'white' }}>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={() => setVideoPlaying(!videoPlaying)}>
+          Play / Stop
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
