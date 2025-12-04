@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import greenCrystalsVideo from './assets/green-crystals.mp4'
+import orangeOil from './assets/3933935-hd_1920_1080_25fps.mp4'
 import slintTextImage from './assets/slint-text.png'
 import ipadFrame from './assets/ipad-m4-landscape.png'
 import Webcam from 'react-webcam'
@@ -29,7 +29,7 @@ function App() {
         muted
         playsInline
       >
-        <source src={greenCrystalsVideo} type="video/mp4" />
+        <source src={orangeOil} type="video/mp4" />
       </video>
 
       <div className="ipad-content">
