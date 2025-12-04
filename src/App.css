@@ -145,7 +145,7 @@
 
 .animation-button {
   position: absolute;
-  bottom: 2%;
+  bottom: 4%;
   left: 2%;
   z-index: 200;
 }
@@ -163,7 +163,7 @@
 }
 
 .white-rectangle.slide-up {
-  transform: translateY(0);
+  animation: slideUp 0.75s linear(0, 0.012 0.9%, 0.05 2%, 0.411 9.2%, 0.517 11.8%, 0.611 14.6%, 0.694 17.7%, 0.765 21.1%, 0.824 24.8%, 0.872 28.9%, 0.91 33.4%, 0.939 38.4%, 0.977 50.9%, 0.994 68.4%, 1)  forwards;
 }
 
 .video-slide-container {
@@ -182,7 +182,7 @@
 }
 
 .video-slide-item.slide-in {
-  animation: slideIn 0.8s ease-out forwards;
+  animation: slideIn 0.75s linear(0, 0.012 0.9%, 0.05 2%, 0.411 9.2%, 0.517 11.8%, 0.611 14.6%, 0.694 17.7%, 0.765 21.1%, 0.824 24.8%, 0.872 28.9%, 0.91 33.4%, 0.939 38.4%, 0.977 50.9%, 0.994 68.4%, 1)  forwards;
 }
 
 .slide-video {
