@@ -11,12 +11,10 @@ import { WebCamLogo } from './components/WebCamLogo.tsx'
 
 function App() {
   const [animationStarted, setAnimationStarted] = useState(false)
-  const backgroundVideoRef = useRef<HTMLVideoElement>(null)
 
   return (
     <div className="app-container">
       <video
-        ref={backgroundVideoRef}
         className="background-video"
         autoPlay
         loop
