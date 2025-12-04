@@ -9,6 +9,7 @@ import slintLogo from './assets/slint-logo.svg'
 import renesasLogo from './assets/Renesas_Electronics_logo.svg'
 import ipadFrame from './assets/ipad-m4-landscape.png'
 import Webcam from 'react-webcam'
+import { VideoSlideItem } from './components/VideoSlideItem'
 import './App.css'
 
 function App() {
@@ -70,39 +71,21 @@ function App() {
         </button>
         <div className={`white-rectangle ${animationStarted ? 'slide-up' : ''}`}>
           <div className="video-slide-container">
-            <div className={`video-slide-item ${animationStarted ? 'slide-in' : ''}`} style={{ animationDelay: '1s' }}>
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="slide-video"
-              >
-                <source src={sciFiGUI} type="video/mp4" />
-              </video>
-            </div>
-            <div className={`video-slide-item ${animationStarted ? 'slide-in' : ''}`} style={{ animationDelay: '1.5s' }}>
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="slide-video"
-              >
-                <source src={graphGUI} type="video/mp4" />
-              </video>
-            </div>
-            <div className={`video-slide-item ${animationStarted ? 'slide-in' : ''}`} style={{ animationDelay: '2s' }}>
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="slide-video"
-              >
-                <source src={circleGUI} type="video/mp4" />
-              </video>
-            </div>
+            <VideoSlideItem
+              videoSrc={sciFiGUI}
+              animationDelay="1s"
+              animationStarted={animationStarted}
+            />
+            <VideoSlideItem
+              videoSrc={graphGUI}
+              animationDelay="1.5s"
+              animationStarted={animationStarted}
+            />
+            <VideoSlideItem
+              videoSrc={circleGUI}
+              animationDelay="2s"
+              animationStarted={animationStarted}
+            />
           </div>
         </div>
       </div>
