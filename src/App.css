@@ -51,7 +51,15 @@
   object-fit: cover;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.5;
+  filter: grayscale(40%);
+}
+
+.masked-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(100%) hue-rotate(180deg) saturate(150%);
+  /* transform: scaleX(0.5); */
 }
 
 .logo {
@@ -97,15 +105,11 @@
 
 .video-text-container {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
 }
 
 .video-mask {
@@ -124,8 +128,4 @@
   mask-position: center;
 }
 
-.masked-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+

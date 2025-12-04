@@ -48,7 +48,7 @@ function App() {
               <Webcam
                 className="masked-video"
                 audio={false}
-                mirrored={false}
+                mirrored={true}
               />
             )}
           </div>
