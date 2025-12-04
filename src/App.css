@@ -166,6 +166,10 @@
   animation: slideUp 0.75s linear(0, 0.012 0.9%, 0.05 2%, 0.411 9.2%, 0.517 11.8%, 0.611 14.6%, 0.694 17.7%, 0.765 21.1%, 0.824 24.8%, 0.872 28.9%, 0.91 33.4%, 0.939 38.4%, 0.977 50.9%, 0.994 68.4%, 1)  forwards;
 }
 
+.white-rectangle.slide-down {
+  animation: slideDown 0.75s ease-in forwards;
+}
+
 .video-slide-container {
   width: 100%;
   height: 100%;
@@ -183,6 +187,16 @@
 
 .video-slide-item.slide-in {
   animation: slideIn 0.75s linear(0, 0.012 0.9%, 0.05 2%, 0.411 9.2%, 0.517 11.8%, 0.611 14.6%, 0.694 17.7%, 0.765 21.1%, 0.824 24.8%, 0.872 28.9%, 0.91 33.4%, 0.939 38.4%, 0.977 50.9%, 0.994 68.4%, 1)  forwards;
+}
+
+.video-slide-item.slide-in.visible {
+  animation: none;
+  transform: translateX(0);
+}
+
+.video-slide-item.visible.slide-out {
+  animation: slideOut 0.75s ease-in forwards;
+  transform: translateX(0);
 }
 
 .slide-video {
@@ -206,5 +220,23 @@
   }
   to {
     transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100vh);
   }
 }
