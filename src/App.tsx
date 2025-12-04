@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import orangeOil from './assets/3933935-hd_1920_1080_25fps.mp4'
 import slintLogo from './assets/slint-logo.svg'
-// import renesasLogo from './assets/Renesas_Electronics_logo.svg'
+import renesasLogo from './assets/Renesas_Electronics_logo.svg'
 import ipadFrame from './assets/ipad-m4-landscape.png'
 import Webcam from 'react-webcam'
 import './App.css'
@@ -40,8 +40,8 @@ function App() {
           <div
             className="video-mask"
             style={{
-              maskImage: `url(${slintLogo})`,
-              WebkitMaskImage: `url(${slintLogo})`
+              maskImage: `url(${slintLogo}), url(${renesasLogo})`,
+              WebkitMaskImage: `url(${slintLogo}), url(${renesasLogo})`,
             }}
           >
             {videoPlaying && (
