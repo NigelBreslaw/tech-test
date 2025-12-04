@@ -2,8 +2,9 @@
 
 import { useState, useRef, useEffect } from 'react'
 import orangeOil from './assets/3933935-hd_1920_1080_25fps.mp4'
-import blueCrystals from './assets/blue-crystals.mp4'
-import greenCrystals from './assets/green-crystals.mp4'
+import circleGUI from './assets/8387491-uhd_3840_2160_30fps.mp4'
+import graphGUI from './assets/12647214_1920_1080_30fps.mp4'
+import sciFiGUI from './assets/15205582-hd_1920_1080_60fps.mp4'
 import slintLogo from './assets/slint-logo.svg'
 import renesasLogo from './assets/Renesas_Electronics_logo.svg'
 import ipadFrame from './assets/ipad-m4-landscape.png'
@@ -61,8 +62,25 @@ function App() {
             {videoPlaying ? 'Stop Webcam' : 'Start Webcam'}
           </button>
         </div>
+        <button 
+          className="animation-button"
+          onClick={() => setAnimationStarted(true)}
+        >
+          Start Animation
+        </button>
         <div className={`white-rectangle ${animationStarted ? 'slide-up' : ''}`}>
           <div className="video-slide-container">
+            <div className={`video-slide-item ${animationStarted ? 'slide-in' : ''}`} style={{ animationDelay: '1s' }}>
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="slide-video"
+              >
+                <source src={sciFiGUI} type="video/mp4" />
+              </video>
+            </div>
             <div className={`video-slide-item ${animationStarted ? 'slide-in' : ''}`} style={{ animationDelay: '1.5s' }}>
               <video
                 autoPlay
@@ -71,7 +89,7 @@ function App() {
                 playsInline
                 className="slide-video"
               >
-                <source src={orangeOil} type="video/mp4" />
+                <source src={graphGUI} type="video/mp4" />
               </video>
             </div>
             <div className={`video-slide-item ${animationStarted ? 'slide-in' : ''}`} style={{ animationDelay: '2s' }}>
@@ -82,18 +100,7 @@ function App() {
                 playsInline
                 className="slide-video"
               >
-                <source src={blueCrystals} type="video/mp4" />
-              </video>
-            </div>
-            <div className={`video-slide-item ${animationStarted ? 'slide-in' : ''}`} style={{ animationDelay: '2.5s' }}>
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="slide-video"
-              >
-                <source src={greenCrystals} type="video/mp4" />
+                <source src={circleGUI} type="video/mp4" />
               </video>
             </div>
           </div>
@@ -105,13 +112,6 @@ function App() {
         alt="iPad Frame"
         className="ipad-frame"
       />
-
-      <button 
-        className="animation-button"
-        onClick={() => setAnimationStarted(true)}
-      >
-        Start Animation
-      </button>
     </div>
   )
 }
