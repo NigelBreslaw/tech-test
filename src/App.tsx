@@ -2,9 +2,9 @@
 
 import { useState, useRef, useEffect } from 'react'
 import orangeOil from './assets/3933935-hd_1920_1080_25fps.mp4'
-import circleGUI from './assets/8387491-uhd_3840_2160_30fps.mp4'
-import graphGUI from './assets/12647214_1920_1080_30fps.mp4'
-import sciFiGUI from './assets/15205582-hd_1920_1080_60fps.mp4'
+import video1 from './assets/15205582-hd_1920_1080_60fps.mp4'
+import video2 from './assets/12647214_1920_1080_30fps.mp4'
+import video3 from './assets/8387491-uhd_3840_2160_30fps.mp4'
 import slintLogo from './assets/slint-logo.svg'
 import renesasLogo from './assets/Renesas_Electronics_logo.svg'
 import ipadFrame from './assets/ipad-m4-landscape.png'
@@ -63,7 +63,7 @@ function App() {
             {videoPlaying ? 'Stop Webcam' : 'Start Webcam'}
           </button>
         </div>
-        <button 
+        <button
           className="animation-button"
           onClick={() => setAnimationStarted(true)}
         >
@@ -72,17 +72,17 @@ function App() {
         <div className={`white-rectangle ${animationStarted ? 'slide-up' : ''}`}>
           <div className="video-slide-container">
             <VideoSlideItem
-              videoSrc={sciFiGUI}
+              videoSrc={video1}
               animationDelay="1s"
               animationStarted={animationStarted}
             />
             <VideoSlideItem
-              videoSrc={graphGUI}
+              videoSrc={video2}
               animationDelay="1.5s"
               animationStarted={animationStarted}
             />
             <VideoSlideItem
-              videoSrc={circleGUI}
+              videoSrc={video3}
               animationDelay="2s"
               animationStarted={animationStarted}
             />

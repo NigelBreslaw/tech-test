@@ -7,8 +7,8 @@ interface VideoSlideItemProps {
 
 export function VideoSlideItem({ videoSrc, animationDelay, animationStarted }: VideoSlideItemProps) {
   return (
-    <div 
-      className={`video-slide-item ${animationStarted ? 'slide-in' : ''}`} 
+    <div
+      className={`video-slide-item ${animationStarted ? 'slide-in' : ''}`}
       style={{ animationDelay }}
     >
       <video
