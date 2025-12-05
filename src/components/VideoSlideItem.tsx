@@ -13,32 +13,34 @@ interface VideoSlideItemProps {
 export function VideoSlideItem({ videoSrc, animationState, inDelay, outDelay, title }: VideoSlideItemProps) {
   let className = 'video-slide-item'
   let animationDelay = '0s'
+  let titleClass = 'video-title title-hidden'
+  let titleTransitionDelay = '0s'
 
   switch (animationState) {
     case 'idle':
-      // No additional class, stays at translateX(100%)
+      titleClass = 'video-title title-hidden'
       break
     case 'sliding-in':
       className += ' slide-in'
       animationDelay = inDelay
+      titleClass = 'video-title title-visible'
+      titleTransitionDelay = `calc(${inDelay} + 0.35s)` // fade starts after slide-in completes
       break
     case 'visible':
-      // Keep slide-in class to maintain forwards state, add visible for explicit positioning
       className += ' slide-in visible'
-      // No animation delay needed
+      titleClass = 'video-title title-visible'
+      titleTransitionDelay = `calc(${inDelay} + 0.75s)`
       break
     case 'sliding-out':
-      // Keep visible class to maintain position, add slide-out for animation
       className += ' visible slide-out'
       animationDelay = outDelay
+      titleClass = 'video-title title-hidden'
+      titleTransitionDelay = outDelay
       break
   }
 
-
   return (
     <div className="video-slide-item-container">
-
-
       <div
         className={className}
         style={{ animationDelay }}
@@ -52,9 +54,13 @@ export function VideoSlideItem({ videoSrc, animationState, inDelay, outDelay, ti
         >
           <source src={videoSrc} type="video/mp4" />
         </video>
-
       </div>
-      <p className="video-title">{title}</p>
+      <p
+        className={titleClass}
+        style={{ transitionDelay: titleTransitionDelay }}
+      >
+        {title}
+      </p>
     </div>
   )
 }
