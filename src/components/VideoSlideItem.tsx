@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react'
 
 type AnimationState = 'idle' | 'sliding-in' | 'visible' | 'sliding-out'
 
@@ -12,9 +11,6 @@ interface VideoSlideItemProps {
 }
 
 export function VideoSlideItem({ videoSrc, animationState, inDelay, outDelay, title }: VideoSlideItemProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [xPosition, setXPosition] = useState(0)
-
   let className = 'video-slide-item'
   let animationDelay = '0s'
 
@@ -38,25 +34,12 @@ export function VideoSlideItem({ videoSrc, animationState, inDelay, outDelay, ti
       break
   }
 
-  useEffect(() => {
-    let rafId: number
-    const tick = () => {
-      const rect = containerRef.current?.getBoundingClientRect()
-      if (rect) {
-        setXPosition(Math.round(rect.left))
-      }
-      rafId = requestAnimationFrame(tick)
-    }
-    tick()
-    return () => cancelAnimationFrame(rafId)
-  }, [])
 
   return (
     <div className="video-slide-item-container">
 
 
       <div
-        ref={containerRef}
         className={className}
         style={{ animationDelay }}
       >
@@ -71,7 +54,6 @@ export function VideoSlideItem({ videoSrc, animationState, inDelay, outDelay, ti
         </video>
 
       </div>
-      <p className="video-position">x: {xPosition}px</p>
       <p className="video-title">{title}</p>
     </div>
   )
