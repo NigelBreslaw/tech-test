@@ -1,26 +1,28 @@
-import React, { useRef, type ReactElement, type Ref } from "react";
+import React, { useRef, useImperativeHandle, type ReactElement } from "react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(SplitText);
+
+export interface CopyRef {
+    trigger: () => void;
+}
 
 export default function Copy({ 
     children, 
     ref,
-    animateOnScroll = true,
     delay = 0
 }: { 
     children: ReactElement;
-    ref?: Ref<HTMLElement>;
-    animateOnScroll?: boolean;
+    ref?: React.Ref<CopyRef>;
     delay?: number;
 }) {
     const containerRef = useRef<HTMLElement | null>(null);
-    const elementRef = useRef([]);
-    const splitRef = useRef([]);
-    const lines = useRef([]);
+    const elementRef = useRef<HTMLElement[]>([]);
+    const splitRef = useRef<SplitText[]>([]);
+    const lines = useRef<HTMLElement[]>([]);
+    const animationRef = useRef<gsap.core.Tween | null>(null);
 
     useGSAP(() => {
 
@@ -30,9 +32,9 @@ export default function Copy({
         elementRef.current = [];
         lines.current = [];
 
-        let elements = [];
+        let elements: HTMLElement[] = [];
         if (containerRef.current.hasAttribute("data-copy-wrapper")){
-            elements = Array.from(containerRef.current.children);
+            elements = Array.from(containerRef.current.children) as HTMLElement[];
         } else {
             elements = [containerRef.current];
         }
@@ -54,17 +56,18 @@ export default function Copy({
 
         if (textIndent && textIndent !== "0px"){
             if(split.lines.length > 0){
-                split.lines[0].style.paddingLeft = textIndent;
+                (split.lines[0] as HTMLElement).style.paddingLeft = textIndent;
             }
             element.style.textIndent = "0";
         }
 
-        lines.current.push(...split.lines);
+        lines.current.push(...(split.lines as HTMLElement[]));
         
         });
 
         gsap.set(lines.current, { y: "100%" });
 
+        // Store animation props but don't play yet - will be triggered via ref
         const animationProps = {
             y: "0%",
             duration: 1,
@@ -73,15 +76,11 @@ export default function Copy({
             delay: delay,
         }
 
-        if (animateOnScroll){
-            ScrollTrigger.create({
-                trigger: containerRef.current,
-                start: "top 75%",
-                once: true,
-            })
-        } else {
-            gsap.to(lines.current, animationProps);
-        }
+        // Create animation but pause it - will be triggered by parent via ref
+        animationRef.current = gsap.to(lines.current, {
+            ...animationProps,
+            paused: true,
+        });
 
         return () => {
             splitRef.current.forEach((split) => {
@@ -91,20 +90,30 @@ export default function Copy({
             });
         };
     }, {
-
-
         scope: containerRef,
-        dependencies: [animateOnScroll, delay],
+        dependencies: [delay],
     });
 
+    // Expose trigger method via ref
+    useImperativeHandle(ref, () => ({
+        trigger: () => {
+            if (animationRef.current) {
+                animationRef.current.play();
+            }
+        },
+    }), []);
 
-    if (React.children.count(children) === 1) {
-        return React.cloneElement(children, { ref: containerRef } );
-    }
-
+    // Always use wrapper div to avoid cloneElement ref issues
+    // For single child, the wrapper will be the container
+    // For multiple children, wrapper has data-copy-wrapper attribute
+    const hasMultipleChildren = React.Children.count(children) > 1;
+    
     return (
-        <div ref={containerRef}> data-copy-wrapper="true">
-        {children}
+        <div 
+            ref={containerRef as React.Ref<HTMLDivElement>} 
+            {...(hasMultipleChildren ? { "data-copy-wrapper": "true" } : {})}
+        >
+            {children}
         </div>
     )
 }
