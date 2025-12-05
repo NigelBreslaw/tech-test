@@ -98,6 +98,7 @@ function App() {
           {showingPanel && <div className={`white-rectangle ${whiteRectangleClass}`} />}
           <div className="video-slide-container">
             <VideoSlideItem
+              id="slint"
               videoSrc={video1}
               animationState={itemState}
               inDelay="0.2s"
@@ -105,6 +106,7 @@ function App() {
               title="Slint"
             />
             <VideoSlideItem
+              id="renesas"
               videoSrc={video2}
               animationState={itemState}
               inDelay="0.4s"
@@ -112,6 +114,7 @@ function App() {
               title="Renesas"
             />
             <VideoSlideItem
+              id="designing-future"
               videoSrc={video3}
               animationState={itemState}
               inDelay="0.6s"

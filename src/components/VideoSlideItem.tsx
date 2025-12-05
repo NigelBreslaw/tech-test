@@ -1,7 +1,9 @@
+import { useVideoStore } from '../store/videoStore'
 
 type AnimationState = 'idle' | 'sliding-in' | 'visible' | 'sliding-out'
 
 interface VideoSlideItemProps {
+  id: string
   videoSrc: string
   animationState: AnimationState
   inDelay: string
@@ -10,7 +12,12 @@ interface VideoSlideItemProps {
   title: string
 }
 
-export function VideoSlideItem({ videoSrc, animationState, inDelay, outDelay, title }: VideoSlideItemProps) {
+export function VideoSlideItem({ id, videoSrc, animationState, inDelay, outDelay, title }: VideoSlideItemProps) {
+  const setClickedVideoId = useVideoStore((state) => state.setClickedVideoId)
+
+  const handleVideoClick = () => {
+    setClickedVideoId(id)
+  }
   let className = 'video-slide-item'
   let animationDelay = '0s'
   let titleClass = 'video-title title-hidden'
@@ -51,6 +58,7 @@ export function VideoSlideItem({ videoSrc, animationState, inDelay, outDelay, ti
           muted
           playsInline
           className="slide-video"
+          onClick={handleVideoClick}
         >
           <source src={videoSrc} type="video/mp4" />
         </video>
