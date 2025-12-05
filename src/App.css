@@ -139,13 +139,15 @@
   width: 80%;
   height: 80%;
   /* Add smooth transition */
-  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+  transition: width 0.5s ease-in-out, height 0.5s ease-in-out, top 0.5s ease-in-out, left 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 .video-text-container.expanded {
-  width: 40%;
-  height: 40%;
-
+  top: 0;
+  left: 0;
+  transform: none;
+  width: 60%;
+  height: 60%;
 }
 
 .video-mask {
