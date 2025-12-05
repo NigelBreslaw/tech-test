@@ -9,6 +9,7 @@ import { VideoSlideItem } from './components/VideoSlideItem'
 import './App.css'
 import { WebCamLogo } from './components/WebCamLogo.tsx'
 import { useVideoStore } from './store/videoStore.ts'
+import DummyText from './components/DummyText.tsx'
 
 type AnimationPhase = 'closed' | 'opening' | 'open' | 'closing'
 
@@ -18,6 +19,7 @@ function App() {
   const [showingPanel, setShowingPanel] = useState(false)
 
   const videoId = useVideoStore((state) => state.clickedVideoId)
+
 
   const handleToggle = () => {
     if (phase === 'closed') {
@@ -128,7 +130,10 @@ function App() {
               />
             </div>
           </div>
-          <div className="video-info-white-blocker" />
+          <div className="video-info-white-blocker" >
+            <div className="full-content-container"/ >
+            {videoId && <DummyText />}
+          </div>
         </div>
       </div>
       <img
@@ -136,6 +141,7 @@ function App() {
         alt="iPad Frame"
         className="ipad-frame"
       />
+      
     </div>
   )
 }
