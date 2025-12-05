@@ -95,7 +95,7 @@ function App() {
           {phase === 'open' || phase === 'opening' ? 'Close Animation' : 'Start Animation'}
         </button>
         <div className="side-bar-holder">
-          {showingPanel && <div className={`white-rectangle ${whiteRectangleClass}`} />}
+          <div className={`white-rectangle ${whiteRectangleClass}`} />
           <div className="video-slide-container">
             <VideoSlideItem
               id="slint"
