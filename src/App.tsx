@@ -14,10 +14,12 @@ type AnimationPhase = 'closed' | 'opening' | 'open' | 'closing'
 function App() {
   const [phase, setPhase] = useState<AnimationPhase>('closed')
   const [shouldSlideDown, setShouldSlideDown] = useState(false)
+  const [showingPanel, setShowingPanel] = useState(false)
 
   const handleToggle = () => {
     if (phase === 'closed') {
       // Start opening
+      setShowingPanel(true)
       setPhase('opening')
       setShouldSlideDown(false)
       // After opening animation completes, transition to open
@@ -26,6 +28,7 @@ function App() {
       }, 1350) // 0.6s max delay + 0.75s animation
     } else if (phase === 'open') {
       // Start closing: videos slide out first
+      setShowingPanel(false)
       setPhase('closing')
       setShouldSlideDown(false)
       // After videos finish sliding out, slide down the rectangle
@@ -80,17 +83,19 @@ function App() {
       </video>
 
       <div className="ipad-content">
-        <div className="video-text-container">
+        <div className={`video-text-container ${showingPanel ? 'expanded' : ''}`}>
           <WebCamLogo />
         </div>
         <button
           className="animation-button"
-          onClick={handleToggle}
+          onClick={() => {
+            handleToggle()
+          }}
         >
           {phase === 'open' || phase === 'opening' ? 'Close Animation' : 'Start Animation'}
         </button>
         <div className="side-bar-holder">
-          <div className={`white-rectangle ${whiteRectangleClass}`} />
+          {showingPanel && <div className={`white-rectangle ${whiteRectangleClass}`} />}
           <div className="video-slide-container">
             <VideoSlideItem
               videoSrc={video1}

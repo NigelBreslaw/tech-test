@@ -68,7 +68,6 @@
   height: 100%;
   object-fit: cover;
   filter: sepia(100%) hue-rotate(180deg) saturate(150%);
-  /* transform: scaleX(0.5); */
 }
 
 .logo {
@@ -139,6 +138,14 @@
   transform: translate(-50%, -50%);
   width: 80%;
   height: 80%;
+  /* Add smooth transition */
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+.video-text-container.expanded {
+  width: 40%;
+  height: 40%;
+
 }
 
 .video-mask {
