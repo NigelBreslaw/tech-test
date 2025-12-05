@@ -36,7 +36,7 @@ function App() {
           setPhase('closed')
           setShouldSlideDown(false)
         }, 750) // Wait for slide-down animation to complete
-      }, 1350) // 0.6s max delay + 0.75s animation for videos
+      }, 400) // 0.6s max delay + 0.75s animation for videos
     }
   }
 
@@ -54,7 +54,18 @@ function App() {
     }
   }
 
+  const getWhiteRectangleClass = (phase: AnimationPhase, shouldSlideDown: boolean): string => {
+    if (shouldSlideDown) {
+      return 'slide-down'
+    }
+    if (phase === 'opening' || phase === 'open' || phase === 'closing') {
+      return 'slide-up'
+    }
+    return ''
+  }
+
   const itemState = getItemAnimationState(phase)
+  const whiteRectangleClass = getWhiteRectangleClass(phase, shouldSlideDown)
 
   return (
     <div className="app-container">
@@ -78,25 +89,29 @@ function App() {
         >
           {phase === 'open' || phase === 'opening' ? 'Close Animation' : 'Start Animation'}
         </button>
-        <div className={`white-rectangle ${(phase === 'open' || phase === 'opening' || phase === 'closing') && !shouldSlideDown ? 'slide-up' : ''} ${shouldSlideDown ? 'slide-down' : ''}`}>
+        <div className="side-bar-holder">
+          <div className={`white-rectangle ${whiteRectangleClass}`} />
           <div className="video-slide-container">
             <VideoSlideItem
               videoSrc={video1}
               animationState={itemState}
               inDelay="0.2s"
-              outDelay="0.4s"
+              outDelay="0s"
+              title="Slint"
             />
             <VideoSlideItem
               videoSrc={video2}
               animationState={itemState}
               inDelay="0.4s"
               outDelay="0.2s"
+              title="Renesas"
             />
             <VideoSlideItem
               videoSrc={video3}
               animationState={itemState}
               inDelay="0.6s"
-              outDelay="0s"
+              outDelay="0.4s"
+              title="Designing for the future"
             />
           </div>
         </div>

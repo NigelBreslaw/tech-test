@@ -6,9 +6,10 @@ interface VideoSlideItemProps {
   inDelay: string
   outDelay: string
   onPlayPause?: (playing: boolean) => void
+  title: string
 }
 
-export function VideoSlideItem({ videoSrc, animationState, inDelay, outDelay }: VideoSlideItemProps) {
+export function VideoSlideItem({ videoSrc, animationState, inDelay, outDelay, title }: VideoSlideItemProps) {
   let className = 'video-slide-item'
   let animationDelay = '0s'
 
@@ -46,6 +47,7 @@ export function VideoSlideItem({ videoSrc, animationState, inDelay, outDelay }: 
       >
         <source src={videoSrc} type="video/mp4" />
       </video>
+      <p className="video-title">{title}</p>
     </div>
   )
 }
