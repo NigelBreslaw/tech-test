@@ -8,6 +8,7 @@ import ipadFrame from './assets/ipad-m4-landscape.png'
 import { VideoSlideItem } from './components/VideoSlideItem'
 import './App.css'
 import { WebCamLogo } from './components/WebCamLogo.tsx'
+import { useVideoStore } from './store/videoStore.ts'
 
 type AnimationPhase = 'closed' | 'opening' | 'open' | 'closing'
 
@@ -15,6 +16,8 @@ function App() {
   const [phase, setPhase] = useState<AnimationPhase>('closed')
   const [shouldSlideDown, setShouldSlideDown] = useState(false)
   const [showingPanel, setShowingPanel] = useState(false)
+
+  const videoId = useVideoStore((state) => state.clickedVideoId)
 
   const handleToggle = () => {
     if (phase === 'closed') {
@@ -94,34 +97,38 @@ function App() {
         >
           {phase === 'open' || phase === 'opening' ? 'Close Animation' : 'Start Animation'}
         </button>
-        <div className="side-bar-holder">
-          <div className={`white-rectangle ${whiteRectangleClass}`} />
-          <div className="video-slide-container">
-            <VideoSlideItem
-              id="slint"
-              videoSrc={video1}
-              animationState={itemState}
-              inDelay="0.2s"
-              outDelay="0s"
-              title="Slint"
-            />
-            <VideoSlideItem
-              id="renesas"
-              videoSrc={video2}
-              animationState={itemState}
-              inDelay="0.4s"
-              outDelay="0.2s"
-              title="Renesas"
-            />
-            <VideoSlideItem
-              id="designing-future"
-              videoSrc={video3}
-              animationState={itemState}
-              inDelay="0.6s"
-              outDelay="0.4s"
-              title="Designing for the future"
-            />
+        <div className={`animated-screen-container ${videoId ? 'full-screen' : ''}`}>
+          <div className="side-bar-holder">
+
+            <div className={`white-rectangle ${whiteRectangleClass}`} />
+            <div className="video-slide-container">
+              <VideoSlideItem
+                id="slint"
+                videoSrc={video1}
+                animationState={itemState}
+                inDelay="0.2s"
+                outDelay="0s"
+                title="Slint"
+              />
+              <VideoSlideItem
+                id="renesas"
+                videoSrc={video2}
+                animationState={itemState}
+                inDelay="0.4s"
+                outDelay="0.2s"
+                title="Renesas"
+              />
+              <VideoSlideItem
+                id="designing-future"
+                videoSrc={video3}
+                animationState={itemState}
+                inDelay="0.6s"
+                outDelay="0.4s"
+                title="Designing for the future"
+              />
+            </div>
           </div>
+          <div className="video-info-white-blocker" />
         </div>
       </div>
       <img

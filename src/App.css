@@ -138,7 +138,7 @@
   transform: translate(-50%, -50%);
   width: 80%;
   height: 80%;
-  /* Add smooth transition */
+
   transition: width 0.5s ease-in-out, height 0.5s ease-in-out, top 0.5s ease-in-out, left 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
@@ -168,6 +168,22 @@
   z-index: 200;
 }
 
+.animated-screen-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  z-index: 50;
+
+  transition: right 2s ease-in-out
+}
+
+.animated-screen-container.full-screen {
+  right: -150%;
+
+}
+
 .side-bar-holder {
   position: absolute;
   right: 0;
@@ -175,6 +191,15 @@
   width: min(30vw, 30vh * 1.3);
   height: 100%;
   z-index: 50;
+}
+
+.video-info-white-blocker {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  right: 100%;
+  top: 0;
+  background: white;
 }
 
 .white-rectangle {
@@ -196,6 +221,8 @@
 .white-rectangle.slide-down {
   animation: slideDown 0.75s ease-in forwards;
 }
+
+
 
 .video-slide-container {
   flex: 1;
